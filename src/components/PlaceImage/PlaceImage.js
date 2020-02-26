@@ -3,9 +3,9 @@ import './PlaceImage.scss'
 
 class PlaceImage extends Component {
   render() {
-    const { cover_image, onImageHovered } = this.props
+    const { cover_image, onImageClicked } = this.props
     return (
-      <div onMouseOver={() => onImageHovered(true)} className="place_image">
+      <div onClick={() => onImageClicked(true)} className="place_image">
         <img alt="place_image" src={cover_image} />
       </div>
     )

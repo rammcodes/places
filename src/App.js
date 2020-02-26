@@ -1,43 +1,42 @@
 import React from 'react'
 import place from './data/place.json'
 import PlaceImage from './components/PlaceImage/PlaceImage'
-import PlaceDetails from './components/PlaceImage/PlaceDetails/PlaceDetails'
+import PlaceDetails from './components/PlaceDetails/PlaceDetails';
 import './App.scss'
+
 
 class App extends React.Component {
   state = {
     place: null,
-    imageHovered: false
+    imageClicked: false
   }
-
   componentDidMount() {
     this.setState({ place })
-    console.log(place)
   }
 
-  onImageHovered = bool => {
-     this.setState({ imageHovered: bool })
+  onImageClicked = bool => {
+     this.setState({ imageClicked: bool })
   }
 
   render() {
-    const { place, imageHovered } = this.state
+    const { place, imageClicked } = this.state
+    
     if (!place) {
       return <h1>Loading...</h1>
     }
 
     return (
       <div className="app">
-        {imageHovered ? (
+        {imageClicked ? (
           <div
-            onMouseLeave={() => this.onImageHovered(false)}
+            onMouseLeave={() => this.onImageClicked(false)}
             className="img-view"
           >
             <img
               src={require('./assets/icons/close.png')}
               alt="close"
               className="close"
-              onMouseEnter={() => this.onImageHovered(false)}
-              onClick={() => this.onImageHovered(false)}
+              onClick={() => this.onImageClicked(false)}
             ></img>
             <img
               className="cover_img"
@@ -48,7 +47,7 @@ class App extends React.Component {
         ) : (
           <>
             <PlaceImage
-              onImageHovered={this.onImageHovered}
+              onImageClicked={this.onImageClicked}
               cover_image={place.cover_image}
             />
             <PlaceDetails place={place} />
